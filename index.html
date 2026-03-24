@@ -9,7 +9,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-   <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css">
 
     <!-- Скрипт для Яндекс Формы -->
     <script src="https://forms.yandex.ru/_static/embed.js"></script>
@@ -58,8 +58,8 @@
     <!-- КНОПКА "НАВЕРХ" -->
     <div class="scroll-to-top" id="scrollToTop"><i class="fas fa-chevron-up"></i></div>
 
-    <!-- ШАПКА ТОЛЬКО С ЛОГОТИПОМ ПО ЦЕНТРУ -->
-    <header>
+    <!-- ШАПКА С LIQUID GLASS ЭФФЕКТОМ -->
+    <header class="liquid-glass-header">
         <div class="container">
             <div class="header-content">
                 <div class="logo">
@@ -285,16 +285,16 @@
         </div>
     </div>
 
-    <!-- НИЖНЕЕ НАВИГАЦИОННОЕ МЕНЮ -->
+    <!-- НИЖНЕЕ НАВИГАЦИОННОЕ МЕНЮ С ВИБРАЦИЕЙ -->
     <nav class="bottom-nav">
-        <button class="nav-item active" data-page="home"><i class="fas fa-home"></i><span>Главная</span></button>
-        <button class="nav-item" data-page="menu"><i class="fas fa-book"></i><span>Меню</span></button>
-        <button class="nav-item" data-page="cart" id="navCartBtn">
+        <button class="nav-item active" data-page="home" data-vibrate="true"><i class="fas fa-home"></i><span>Главная</span></button>
+        <button class="nav-item" data-page="menu" data-vibrate="true"><i class="fas fa-book"></i><span>Меню</span></button>
+        <button class="nav-item" data-page="cart" id="navCartBtn" data-vibrate="true">
             <i class="fas fa-shopping-cart"></i>
             <span>Корзина</span>
             <span class="cart-count-badge" id="navCartCount">0</span>
         </button>
-        <button class="nav-item" data-page="more" id="navMoreBtn"><i class="fas fa-ellipsis-h"></i><span>Ещё</span></button>
+        <button class="nav-item" data-page="more" id="navMoreBtn" data-vibrate="true"><i class="fas fa-ellipsis-h"></i><span>Ещё</span></button>
     </nav>
 
     <!-- Модальное окно оформления заказа -->
@@ -1760,6 +1760,68 @@
                 }
             }
         });
+
+        // ========== НОВЫЕ ФУНКЦИИ: ВИБРАЦИЯ И РАЗБЛОКИРОВКА EMAIL ==========
+        
+        // ИЗМЕНЕНИЕ 2: Функция вибрации для мобильных устройств
+        function vibrateIfSupported() {
+            if (window.navigator && window.navigator.vibrate) {
+                window.navigator.vibrate(50);
+            }
+        }
+
+        // Добавляем обработчики вибрации на кнопки навигации
+        document.querySelectorAll('.nav-item[data-vibrate="true"]').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                vibrateIfSupported();
+            });
+        });
+
+        // ИЗМЕНЕНИЕ 1: Функция для разблокировки поля email после автозаполнения
+        function setupEmailFieldUnlock() {
+            const emailField = document.getElementById('customerEmail');
+            if (emailField) {
+                // Убираем атрибут readonly, если он был установлен
+                emailField.removeAttribute('readonly');
+                // Снимаем блокировку с поля
+                emailField.disabled = false;
+                // Делаем поле редактируемым
+                emailField.style.backgroundColor = 'white';
+                emailField.style.opacity = '1';
+                
+                // Слушаем изменения в поле (на случай если скрипт вставит значение)
+                emailField.addEventListener('change', function() {
+                    this.removeAttribute('readonly');
+                    this.disabled = false;
+                });
+                
+                // Слушаем событие автозаполнения браузера
+                emailField.addEventListener('animationstart', function(e) {
+                    if (e.animationName === 'onAutoFillStart') {
+                        setTimeout(() => {
+                            emailField.removeAttribute('readonly');
+                            emailField.disabled = false;
+                        }, 100);
+                    }
+                });
+            }
+        }
+        
+        // Вызываем функцию при загрузке
+        setupEmailFieldUnlock();
+        
+        // Также следим за модальным окном, чтобы при открытии поле было разблокировано
+        const orderModalForEmail = document.getElementById('orderModal');
+        if (orderModalForEmail) {
+            const observer = new MutationObserver(function(mutations) {
+                mutations.forEach(function(mutation) {
+                    if (mutation.attributeName === 'style' && orderModalForEmail.style.visibility === 'visible') {
+                        setTimeout(setupEmailFieldUnlock, 100);
+                    }
+                });
+            });
+            observer.observe(orderModalForEmail, { attributes: true });
+        }
     </script>
 </body>
 </html>
