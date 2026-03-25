@@ -327,7 +327,7 @@ textarea.form-control {
     to { opacity: 1; transform: translateY(0); }
 }
 
-/* Кнопка-карточка бонусной карты (БЕЗ ЧЕКБОКСА) */
+/* Кнопка-карточка бонусной карты */
 .bonus-card-button {
     display: flex;
     align-items: center;
@@ -409,7 +409,6 @@ textarea.form-control {
     margin: 0;
 }
 
-/* Чекбокс скрыт */
 .bonus-card-checkbox {
     display: none;
 }
@@ -543,7 +542,6 @@ textarea.form-control {
     color: var(--main-color);
 }
 
-/* Скрываем заголовки категорий при поиске */
 .menu-section.search-mode .section-title {
     display: none;
 }
@@ -588,7 +586,6 @@ textarea.form-control {
     gap: 10px;
 }
 
-/* Стили для страницы избранного */
 .favorites-container {
     padding: 10px 0;
 }
@@ -610,6 +607,7 @@ textarea.form-control {
     display: flex;
     flex-direction: column;
     animation: fadeInUp 0.5s ease;
+    animation-fill-mode: both;
 }
 
 .favorites-item:hover {
@@ -772,14 +770,8 @@ textarea.form-control {
 }
 
 @keyframes slideIn {
-    from {
-        opacity: 0;
-        transform: scale(0.8);
-    }
-    to {
-        opacity: 1;
-        transform: scale(1);
-    }
+    from { opacity: 0; transform: scale(0.8); }
+    to { opacity: 1; transform: scale(1); }
 }
 
 @keyframes glow {
@@ -1196,7 +1188,6 @@ textarea.form-control {
     box-shadow: 0 4px 8px rgba(0,0,0,0.1);
 }
 
-/* Новые стили для управления количеством в корзине */
 .cart-item-info {
     display: flex;
     flex-direction: column;
@@ -1244,7 +1235,6 @@ textarea.form-control {
     box-shadow: 0 2px 8px rgba(0,0,0,0.1);
 }
 
-/* Кнопка минус всегда активна */
 .cart-quantity-btn:disabled {
     opacity: 0.5;
     cursor: not-allowed;
@@ -1375,7 +1365,6 @@ textarea.form-control {
     padding: 20px; 
 }
 
-/* Главное меню окна "Ещё" */
 .more-main-menu { display: block; }
 .more-main-menu.hidden { display: none; }
 .more-menu-item {
@@ -1411,7 +1400,6 @@ textarea.form-control {
     transition: transform 0.3s ease;
 }
 
-/* Контентные панели внутри "Ещё" */
 .more-content-panel { display: none; }
 .more-content-panel.active { display: block; }
 
@@ -1454,7 +1442,103 @@ textarea.form-control {
     margin-bottom: 20px;
 }
 
-/* Бонусная карта внутри "Ещё" */
+/* ========== СТАТИСТИКА ПОЛЬЗОВАТЕЛЯ ========== */
+.user-stats-card {
+    background: linear-gradient(135deg, #fff9f0, #fff2e0);
+    border-radius: 20px;
+    padding: 20px;
+    margin-top: 20px;
+    border: 1px solid var(--main-color);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+}
+
+.user-stats-card h3 {
+    font-family: var(--handwritten-font);
+    font-size: 1.4rem;
+    color: var(--dark-color);
+    border-bottom: 2px solid var(--main-color);
+    display: inline-block;
+    padding-bottom: 5px;
+}
+
+.stat-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 0;
+    border-bottom: 1px dashed rgba(92, 61, 30, 0.2);
+}
+
+.stat-item:last-child {
+    border-bottom: none;
+}
+
+.stat-item span:first-child {
+    font-size: 1rem;
+    color: #666;
+}
+
+.stat-item strong {
+    font-size: 1.2rem;
+    color: var(--dark-color);
+    font-weight: 700;
+}
+
+/* Стили для отмененных заказов */
+.order-card.cancelled {
+    background-color: #fff5f5;
+    border-left: 4px solid #ff4757;
+    opacity: 0.9;
+}
+
+.order-card.cancelled .order-status.status-cancelled {
+    background-color: #ffebee;
+    color: #ff4757;
+}
+
+.cancel-order-btn {
+    background: linear-gradient(135deg, #ff6b6b 0%, #ff4757 100%);
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 50px;
+    cursor: pointer;
+    font-weight: 700;
+    font-size: 1rem;
+    width: 100%;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    box-shadow: 0 4px 10px rgba(255, 71, 87, 0.3);
+    position: relative;
+    overflow: hidden;
+}
+
+.cancel-order-btn::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
+    transform: translate(-50%, -50%);
+    transition: width 0.5s ease, height 0.5s ease;
+}
+
+.cancel-order-btn:hover::before {
+    width: 200px;
+    height: 200px;
+}
+
+.cancel-order-btn:hover {
+    background: linear-gradient(135deg, #ff4757 0%, #ff6b6b 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 15px rgba(255, 71, 87, 0.4);
+}
+
+/* ========== БОНУСНАЯ КАРТА ========== */
 .bonus-image-container { text-align: center; margin: 20px 0; }
 .bonus-image { 
     width: 200px; 
@@ -1628,6 +1712,7 @@ textarea.form-control {
 .status-delivery { background-color: #d4edda; color: #155724; }
 .status-ready { background-color: #cce5ff; color: #004085; }
 .status-completed { background-color: #e2e3e5; color: #383d41; }
+.status-cancelled { background-color: #ffebee; color: #ff4757; }
 .order-items { margin-bottom: 10px; }
 .order-item { 
     display: flex; 
@@ -1978,8 +2063,8 @@ footer:hover {
         font-size: 1.3rem;
     }
 }
-/* ========== ИЗМЕНЕНИЕ 1: Разблокировка поля email ========== */
-/* Стили для анимации автозаполнения браузера */
+
+/* Анимация для автозаполнения */
 @keyframes onAutoFillStart {
     from { /**/ }
     to { /**/ }
@@ -1994,7 +2079,6 @@ footer:hover {
     -webkit-text-fill-color: var(--dark-color);
 }
 
-/* Явно снимаем блокировку поля */
 #customerEmail {
     background-color: white !important;
     opacity: 1 !important;
@@ -2002,14 +2086,12 @@ footer:hover {
     transition: background-color 0s;
 }
 
-/* ========== ИЗМЕНЕНИЕ 2: Вибрация для мобильных (опционально) ========== */
-/* Стили для активного состояния кнопок (визуальный отклик) */
 .nav-item:active {
     transform: scale(0.95);
     transition: transform 0.05s ease;
 }
 
-/* ========== ИЗМЕНЕНИЕ 3: Liquid Glass эффект для шапки ========== */
+/* Liquid Glass эффект для шапки */
 .liquid-glass-header {
     position: sticky;
     top: 0;
@@ -2022,347 +2104,6 @@ footer:hover {
         rgba(252, 205, 151, 0.85) 0%,
         rgba(252, 205, 151, 0.75) 100%
     );
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-    animation: liquidGlassFlow 8s ease-in-out infinite;
-}
-
-/* Анимация для жидкого стекла */
-@keyframes liquidGlassFlow {
-    0% {
-        backdrop-filter: blur(10px) brightness(1);
-        -webkit-backdrop-filter: blur(10px) brightness(1);
-        background: linear-gradient(
-            135deg,
-            rgba(252, 205, 151, 0.85) 0%,
-            rgba(252, 205, 151, 0.75) 100%
-        );
-    }
-    25% {
-        backdrop-filter: blur(14px) brightness(1.02);
-        -webkit-backdrop-filter: blur(14px) brightness(1.02);
-        background: linear-gradient(
-            125deg,
-            rgba(252, 205, 151, 0.9) 0%,
-            rgba(252, 205, 151, 0.8) 100%
-        );
-    }
-    50% {
-        backdrop-filter: blur(12px) brightness(1);
-        -webkit-backdrop-filter: blur(12px) brightness(1);
-        background: linear-gradient(
-            145deg,
-            rgba(252, 205, 151, 0.88) 0%,
-            rgba(252, 205, 151, 0.78) 100%
-        );
-    }
-    75% {
-        backdrop-filter: blur(10px) brightness(0.98);
-        -webkit-backdrop-filter: blur(10px) brightness(0.98);
-        background: linear-gradient(
-            115deg,
-            rgba(252, 205, 151, 0.82) 0%,
-            rgba(252, 205, 151, 0.72) 100%
-        );
-    }
-    100% {
-        backdrop-filter: blur(12px) brightness(1);
-        -webkit-backdrop-filter: blur(12px) brightness(1);
-        background: linear-gradient(
-            135deg,
-            rgba(252, 205, 151, 0.85) 0%,
-            rgba(252, 205, 151, 0.75) 100%
-        );
-    }
-}
-
-/* Дополнительный эффект ripple для шапки при скролле */
-.liquid-glass-header::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: radial-gradient(
-        circle at 50% 50%,
-        rgba(255, 255, 255, 0.3) 0%,
-        transparent 70%
-    );
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.3s ease;
-}
-
-.liquid-glass-header:hover::before {
-    opacity: 0.5;
-}
-
-/* Для мобильных устройств делаем эффект более плавным */
-@media (max-width: 768px) {
-    .liquid-glass-header {
-        backdrop-filter: blur(8px);
-        -webkit-backdrop-filter: blur(8px);
-        animation: liquidGlassFlow 6s ease-in-out infinite;
-    }
-}
-
-/* ========== СТИЛИ ДЛЯ ПРОФИЛЯ СТАТИСТИКИ ========== */
-.profile-stats {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    margin-top: 20px;
-    padding: 15px;
-    background: linear-gradient(135deg, #fef9e6, #fff5e0);
-    border-radius: 20px;
-    border: 2px solid var(--main-color);
-}
-
-.stat-card {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    padding: 12px 15px;
-    background-color: white;
-    border-radius: 12px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-    transition: all 0.3s ease;
-}
-
-.stat-card:hover {
-    transform: translateX(5px);
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-}
-
-.stat-card i {
-    font-size: 2rem;
-    color: var(--dark-color);
-    width: 45px;
-    text-align: center;
-}
-
-.stat-info {
-    flex: 1;
-}
-
-.stat-label {
-    display: block;
-    font-size: 0.85rem;
-    color: #666;
-    margin-bottom: 4px;
-}
-
-.stat-value {
-    display: block;
-    font-size: 1.3rem;
-    font-weight: 700;
-    color: var(--dark-color);
-}
-
-/* ========== СТИЛИ ДЛЯ ВЫЕЗЖАЮЩЕЙ ПАНЕЛИ С ГРИПОМ ========== */
-.more-panel-grip {
-    width: 50px;
-    height: 5px;
-    background-color: rgba(92, 61, 30, 0.3);
-    border-radius: 3px;
-    margin: 10px auto 0;
-    cursor: grab;
-}
-
-.more-panel-grip:active {
-    cursor: grabbing;
-}
-
-/* ========== СТИЛИ ДЛЯ КНОПКИ ОТМЕНЫ ЗАКАЗА ========== */
-.cancel-order-btn {
-    background: linear-gradient(135deg, #ff6b6b 0%, #ff4757 100%);
-    color: white;
-    border: none;
-    padding: 12px 20px;
-    border-radius: 50px;
-    cursor: pointer;
-    font-weight: 700;
-    font-size: 1rem;
-    margin-top: 15px;
-    width: 100%;
-    transition: all 0.3s ease;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    box-shadow: 0 4px 10px rgba(255, 71, 87, 0.3);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-}
-
-.cancel-order-btn:hover {
-    background: linear-gradient(135deg, #ff4757 0%, #ff6b6b 100%);
-    transform: translateY(-2px);
-    box-shadow: 0 8px 15px rgba(255, 71, 87, 0.4);
-}
-
-/* ========== СТИЛИ ДЛЯ МОДАЛЬНОГО ОКНА ОТМЕНЫ ========== */
-.cancel-modal-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.7);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 5000;
-    opacity: 0;
-    visibility: hidden;
-    transition: all 0.3s ease;
-}
-
-.cancel-modal-overlay.active {
-    opacity: 1;
-    visibility: visible;
-}
-
-.cancel-modal {
-    background-color: white;
-    width: 90%;
-    max-width: 450px;
-    border-radius: 20px;
-    padding: 25px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-    transform: translateY(-20px);
-    transition: transform 0.3s ease;
-}
-
-.cancel-modal-overlay.active .cancel-modal {
-    transform: translateY(0);
-}
-
-.cancel-modal-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 20px;
-}
-
-.cancel-modal-title {
-    font-size: 1.6rem;
-    color: var(--dark-color);
-    font-family: var(--handwritten-font);
-    font-weight: 400;
-}
-
-.close-cancel-modal {
-    background: none;
-    border: none;
-    font-size: 1.5rem;
-    cursor: pointer;
-    color: #666;
-    transition: transform 0.3s ease;
-}
-
-.close-cancel-modal:hover {
-    transform: rotate(90deg);
-    color: var(--dark-color);
-}
-
-.cancel-reasons {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    margin-bottom: 15px;
-}
-
-.cancel-reason-btn {
-    background-color: #f5f5f5;
-    border: 2px solid #e0e0e0;
-    border-radius: 12px;
-    padding: 12px 20px;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    text-align: left;
-    font-weight: 500;
-}
-
-.cancel-reason-btn:hover {
-    background-color: var(--main-color);
-    border-color: var(--dark-color);
-    transform: translateX(5px);
-}
-
-.cancel-reason-btn.selected {
-    background-color: var(--main-color);
-    border-color: var(--dark-color);
-    box-shadow: 0 2px 8px rgba(252, 205, 151, 0.4);
-}
-
-.cancel-order-confirm-btn {
-    background: linear-gradient(135deg, #ff6b6b 0%, #ff4757 100%);
-    color: white;
-    border: none;
-    padding: 12px 24px;
-    border-radius: 50px;
-    cursor: pointer;
-    font-weight: 700;
-    font-size: 1rem;
-    flex: 1;
-    transition: all 0.3s ease;
-}
-
-.cancel-order-confirm-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(255, 71, 87, 0.4);
-}
-
-.cancel-order-close-btn {
-    background-color: #f0f0f0;
-    color: #666;
-    border: none;
-    padding: 12px 24px;
-    border-radius: 50px;
-    cursor: pointer;
-    font-weight: 600;
-    font-size: 1rem;
-    flex: 1;
-    transition: all 0.3s ease;
-}
-
-.cancel-order-close-btn:hover {
-    background-color: #e0e0e0;
-}
-
-/* ========== СТИЛИ ДЛЯ АВТОЗАПОЛНЕНИЯ EMAIL ========== */
-@keyframes onAutoFillStart {
-    from { /**/ }
-    to { /**/ }
-}
-
-#customerEmail:-webkit-autofill,
-#customerEmail:-webkit-autofill:hover,
-#customerEmail:-webkit-autofill:focus,
-#customerEmail:-webkit-autofill:active {
-    animation-name: onAutoFillStart;
-    transition: background-color 50000s ease-in-out 0s;
-    -webkit-text-fill-color: var(--dark-color);
-}
-
-#customerEmail {
-    background-color: white !important;
-    opacity: 1 !important;
-    -webkit-text-fill-color: var(--dark-color) !important;
-    transition: background-color 0s;
-}
-
-/* ========== LIQUID GLASS ЭФФЕКТ ДЛЯ ШАПКИ ========== */
-.liquid-glass-header {
-    position: sticky;
-    top: 0;
-    z-index: 100;
-    background-color: var(--main-color);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    background: linear-gradient(135deg, rgba(252, 205, 151, 0.85) 0%, rgba(252, 205, 151, 0.75) 100%);
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
     animation: liquidGlassFlow 8s ease-in-out infinite;
 }
@@ -2418,10 +2159,4 @@ footer:hover {
         -webkit-backdrop-filter: blur(8px);
         animation: liquidGlassFlow 6s ease-in-out infinite;
     }
-}
-
-/* ========== ВИЗУАЛЬНЫЙ ОТКЛИК КНОПОК ========== */
-.nav-item:active {
-    transform: scale(0.95);
-    transition: transform 0.05s ease;
 }
