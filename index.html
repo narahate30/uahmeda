@@ -164,9 +164,71 @@
                 <button class="order-btn" id="cartPageOrderBtn" disabled>Оформить заказ</button>
             </div>
         </div>
-    </main>
 
-   
+        <div id="profile-page" class="page">
+    <div class="container profile-container">
+        <!-- Карточка аккаунта -->
+        <div class="profile-card" id="profileCard">
+            <div id="profileAvatarContainer">
+                <img src="" id="profileAvatar" class="profile-avatar" style="display:none;">
+                <div id="profilePlaceholder" style="width:80px; height:80px; background:#f0f0f0; border-radius:50%; display:flex; align-items:center; justify-content:center;">
+                    <i class="fas fa-user fa-2x" style="color:#ccc;"></i>
+                </div>
+            </div>
+            <div class="profile-info" id="profileInfo">
+                <div id="profileLoggedIn" style="display:none;">
+                    <div class="profile-name" id="profileName"></div>
+                    <div class="profile-email" id="profileEmail"></div>
+                </div>
+                <div id="profileLoggedOut">
+                    <button class="google-login-btn" id="profileGoogleLoginBtn"><i class="fab fa-google"></i> Войти через Google</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Кнопки навигации профиля -->
+        <div id="profileMainNav">
+            <div class="profile-nav-grid">
+                <button class="profile-nav-btn" data-panel="orders"><i class="fas fa-clock"></i><span>Заказы</span></button>
+                <button class="profile-nav-btn" data-panel="bonus"><i class="fas fa-percent"></i><span>Карта</span></button>
+                <button class="profile-nav-btn" data-panel="favorites"><i class="fas fa-heart"></i><span>Избранное</span></button>
+            </div>
+            <div class="profile-nav-wide">
+                <button class="profile-nav-btn" data-panel="announcements"><i class="fas fa-bullhorn"></i><span>Объявления</span></button>
+                <button class="profile-nav-btn" data-panel="feedback"><i class="fas fa-envelope"></i><span>Обратная связь</span></button>
+            </div>
+        </div>
+
+        <!-- Панели контента (скрыты по умолчанию) -->
+        <div class="profile-content-panel" id="ordersPanel">
+            <div class="panel-header"><button class="panel-back-btn" data-panel-back="orders"><i class="fas fa-arrow-left"></i></button><h3>Мои заказы</h3></div>
+            <div id="ordersContainer"></div>
+        </div>
+
+        <div class="profile-content-panel" id="bonusPanel">
+            <div class="panel-header"><button class="panel-back-btn" data-panel-back="bonus"><i class="fas fa-arrow-left"></i></button><h3>Бонусная карта</h3></div>
+            <div id="bonusPanelContent"></div>
+        </div>
+
+        <div class="profile-content-panel" id="favoritesPanel">
+            <div class="panel-header"><button class="panel-back-btn" data-panel-back="favorites"><i class="fas fa-arrow-left"></i></button><h3>Избранное</h3></div>
+            <div id="favoritesContainer"></div>
+        </div>
+
+        <div class="profile-content-panel" id="announcementsPanel">
+            <div class="panel-header"><button class="panel-back-btn" data-panel-back="announcements"><i class="fas fa-arrow-left"></i></button><h3>Объявления</h3></div>
+            <div id="announcementsContainer"></div>
+        </div>
+
+        <div class="profile-content-panel" id="feedbackPanel">
+            <div class="panel-header"><button class="panel-back-btn" data-panel-back="feedback"><i class="fas fa-arrow-left"></i></button><h3>Обратная связь</h3></div>
+            <iframe src="https://forms.yandex.ru/u/6998a2c71f1eb5cd701980cf?iframe=1" frameborder="0" width="100%" height="500px" style="border-radius:12px;"></iframe>
+        </div>
+
+        <div class="app-version">v.1.1.0</div>
+    </div>
+</div>
+    </main>
 
             <!-- Панель авторизации -->
             <div class="more-content-panel" id="moreAuthPanel">
@@ -277,7 +339,7 @@
             <span>Корзина</span>
             <span class="cart-count-badge" id="navCartCount">0</span>
         </button>
-        <button class="nav-item" data-page="more" id="navMoreBtn" data-vibrate="true"><i class="fas fa-ellipsis-h"></i><span>Ещё</span></button>
+        <button class="nav-item" data-page="profile"><i class="fas fa-user"></i><span>Профиль</span></button>
     </nav>
 
     <!-- Модальное окно оформления заказа -->
